@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 // On inclut les classes Response et Route de Symfony
+
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,13 +30,14 @@ class PageController extends AbstractController
      * Ici on crée une nouvelle routes pour la page blog
      * On a besoin de créer une nouvelle vue page/blog.html.twig
      */
-    #[Route('/blog', name: 'app_blog')]
-    public function blog(): Response
+    #[Route('/blog', name: 'app_blog', methods: ['GET','POST'])]
+    public function blog(PostRepository $posts): Response
     {   
         // On renvoie une réponse en rendant la vue 'page/blog.html.twig'
         // avec l'ajout de la variable 'title'
         return $this->render('page/blog.html.twig', [
             'title' => 'Tous les atricles du blog', // Variable
+            'posts' => $posts->findAll()// Tableau des articles
         ]);
     }
 }
