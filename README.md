@@ -3,7 +3,7 @@
 ## Création d'un projet
 
 ```bash
-symfony new blog __webapp
+symfony new blog --webapp
 ```
 
 ## Lancement et Arrêt du serveur
